@@ -1,4 +1,5 @@
 #include "weight.h"
+#include <stdexcept>
 
 const std::string WeightArgs::kg = "kg";
 const std::string WeightArgs::g = "g";
@@ -11,7 +12,7 @@ float WeightConvert::convert(const std::string& from, const std::string& to, flo
     if (from == WeightArgs::g && to == WeightArgs::ounces) return g_to_ounces(val);
     if (from == WeightArgs::ounces && to == WeightArgs::g) return ounces_to_g(val);
     
-    return 0.0f;
+    throw std::invalid_argument("Unknown conversion: " + from + " -> " + to);
 }
 
 float WeightConvert::kg_to_g(float kg) { return kg * 1000.0f; }

@@ -1,4 +1,5 @@
 #include "length.h"
+#include <stdexcept>
 
 const std::string LengthArgs::km = "km";
 const std::string LengthArgs::m = "m";
@@ -11,7 +12,7 @@ float LengthConvert::convert(const std::string& from, const std::string& to, flo
     if (from == LengthArgs::cm && to == LengthArgs::mm) return cm_to_mm(val);
     if (from == LengthArgs::mm && to == LengthArgs::cm) return mm_to_cm(val);
     
-    return 0.0f;
+    throw std::invalid_argument("Unknown conversion: " + from + " -> " + to);
 }
 
 float LengthConvert::km_to_m(float km) { return km * 1000.0f; }

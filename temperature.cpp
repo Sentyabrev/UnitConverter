@@ -1,4 +1,5 @@
 #include "temperature.h"
+#include <stdexcept>
 
 const std::string TempArgs::C = "C";
 const std::string TempArgs::F = "F";
@@ -10,7 +11,7 @@ float TempConvert::convert(const std::string& from, const std::string& to, float
     if (from == TempArgs::C && to == TempArgs::K) return C_to_K(val);
     if (from == TempArgs::K && to == TempArgs::C) return K_to_C(val);
 
-    return 0.0f;
+    throw std::invalid_argument("Unknown conversion: " + from + " -> " + to);
 }
 
 float TempConvert::C_to_F(float C) { return C * 9.0f / 5.0f + 32.0f; }
